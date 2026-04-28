@@ -1,0 +1,189 @@
+%% Mermaid ER diagram — GovAlta Agency 26 Hackathon Dataset
+%% Hand-authored: read-only replica이므로 자동생성 불가
+%% Last generated: 2026-04-27
+%% Scope: Lens 1-5 분석에 필요한 핵심 관계만 표시 (전체 79 테이블 중 ~20개)
+
+erDiagram
+    %% =========================
+    %% CRA SCHEMA
+    %% =========================
+    CRA_IDENTIFICATION {
+        varchar bn PK
+        int fiscal_year PK
+        varchar category
+        char designation
+        text legal_name
+        date registration_date
+    }
+
+    CRA_FINANCIAL_GENERAL {
+        varchar bn PK
+        date fpe PK
+        numeric field_5030
+        numeric field_5862
+        numeric field_5863
+        numeric field_5864
+        bool field_5841
+    }
+
+    CRA_DIRECTORS {
+        varchar bn FK
+        date fpe FK
+        text last_name
+        text first_name
+        text initials
+        bool at_arms_length
+    }
+
+    CRA_QUALIFIED_DONEES {
+        varchar bn FK
+        varchar donee_bn FK
+        text donee_name
+        numeric total_gifts
+        bool political_activity_gift
+    }
+
+    GOVT_FUNDING_BY_CHARITY {
+        varchar bn FK
+        int fiscal_year
+        text legal_name
+        numeric federal
+        numeric provincial
+        numeric municipal
+        numeric total_govt
+        numeric revenue
+        numeric govt_share_of_rev
+    }
+
+    OVERHEAD_BY_CHARITY {
+        varchar bn FK
+        numeric program_ratio
+        numeric overhead_ratio
+    }
+
+    T3010_PLAUSIBILITY_FLAGS {
+        varchar bn FK
+        date fpe
+        text rule_code
+        numeric severity
+    }
+
+    %% =========================
+    %% CRA — Loop Analysis (pre-computed)
+    %% =========================
+    LOOPS {
+        int id PK
+        int hops
+        text path_display
+        numeric total_flow
+        int min_year
+        int max_year
+    }
+
+    LOOP_PARTICIPANTS {
+        varchar bn FK
+        int loop_id FK
+        int position_in_loop
+        varchar sends_to
+        varchar receives_from
+    }
+
+    LOOP_EDGES {
+        varchar src FK
+        varchar dst FK
+        numeric total_amt
+        int edge_count
+    }
+
+    IDENTIFIED_HUBS {
+        varchar bn FK
+        int scc_id FK
+        int in_degree
+        int out_degree
+        numeric total_inflow
+        numeric total_outflow
+        varchar hub_type
+    }
+
+    SCC_COMPONENTS {
+        int scc_id PK
+        int component_size
+    }
+
+    %% =========================
+    %% FED + AB + PUBLIC FACT TABLES
+    %% =========================
+    FED_GRANTS_CONTRIBUTIONS {
+        int _id PK
+        text ref_number
+        text amendment_number
+        text recipient_business_number
+        text recipient_legal_name
+        numeric agreement_value
+        date agreement_start_date
+        text owner_org
+    }
+
+    AB_GRANTS {
+        int id PK
+        text ministry
+        text recipient
+        numeric amount
+        timestamp payment_date
+    }
+
+    PUBLIC_CONTRACTS {
+        int id PK
+        text vendor_name
+        text original_value
+        text amendment_value
+        text solicitation_procedure
+        text former_public_servant
+    }
+
+    %% =========================
+    %% GENERAL — Entity Matching
+    %% =========================
+    ENTITY_GOLDEN_RECORDS {
+        int id PK
+        text canonical_name
+        varchar bn_root
+        jsonb cra_profile
+        jsonb fed_profile
+        jsonb ab_profile
+        jsonb related_entities
+    }
+
+    ENTITY_SOURCE_LINKS {
+        int id PK
+        int entity_id FK
+        text source_schema
+        text source_table
+        jsonb source_pk
+        text source_name
+        numeric match_confidence
+    }
+
+    %% =========================
+    %% RELATIONSHIPS
+    %% =========================
+    CRA_IDENTIFICATION ||--|| CRA_FINANCIAL_GENERAL : "(bn, fpe)"
+    CRA_IDENTIFICATION ||--o{ CRA_DIRECTORS : "bn"
+    CRA_IDENTIFICATION ||--o{ CRA_QUALIFIED_DONEES : "bn (sender)"
+    CRA_IDENTIFICATION ||--o{ GOVT_FUNDING_BY_CHARITY : "bn"
+    CRA_IDENTIFICATION ||--o{ OVERHEAD_BY_CHARITY : "bn"
+    CRA_IDENTIFICATION ||--o{ T3010_PLAUSIBILITY_FLAGS : "bn"
+
+    CRA_QUALIFIED_DONEES }o--|| CRA_IDENTIFICATION : "donee_bn"
+
+    LOOPS ||--o{ LOOP_PARTICIPANTS : "loop_id"
+    LOOP_PARTICIPANTS }o--|| CRA_IDENTIFICATION : "bn"
+    LOOP_EDGES }o--|| CRA_IDENTIFICATION : "src"
+    LOOP_EDGES }o--|| CRA_IDENTIFICATION : "dst"
+    IDENTIFIED_HUBS }o--|| CRA_IDENTIFICATION : "bn"
+    IDENTIFIED_HUBS }o--|| SCC_COMPONENTS : "scc_id"
+
+    ENTITY_GOLDEN_RECORDS ||--o{ ENTITY_SOURCE_LINKS : "entity_id"
+    ENTITY_SOURCE_LINKS }o--|| CRA_IDENTIFICATION : "source_pk -> bn (when source_schema='cra')"
+    ENTITY_SOURCE_LINKS }o--|| FED_GRANTS_CONTRIBUTIONS : "source_pk -> _id (when source_schema='fed')"
+    ENTITY_SOURCE_LINKS }o--|| AB_GRANTS : "source_pk -> id (when source_schema='ab')"
