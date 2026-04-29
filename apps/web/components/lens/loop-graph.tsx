@@ -41,11 +41,11 @@ export function LoopGraph({ nodes, edges }: LoopGraphProps): React.ReactElement 
   return (
     <div data-testid="loop-graph" className="rounded-lg border border-gray-200 bg-white p-4">
       <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-700">
-        Loop 참여자 ({nodes.length} 노드, {edges.length} 엣지)
+        Loop participants ({nodes.length} nodes, {edges.length} edges)
       </h3>
 
       <div className="mb-4">
-        <div className="mb-1 text-xs font-medium text-gray-500">참여 BN 목록</div>
+        <div className="mb-1 text-xs font-medium text-gray-500">Participant BN list</div>
         <ul className="space-y-1">
           {nodes.map((n, i) => (
             <li
@@ -64,7 +64,7 @@ export function LoopGraph({ nodes, edges }: LoopGraphProps): React.ReactElement 
       </div>
 
       <div>
-        <div className="mb-1 text-xs font-medium text-gray-500">자금 흐름</div>
+        <div className="mb-1 text-xs font-medium text-gray-500">Funding flow</div>
         <ul className="space-y-1">
           {edges.map((e, idx) => (
             <li

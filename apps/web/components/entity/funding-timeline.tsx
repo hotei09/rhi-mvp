@@ -47,26 +47,66 @@ export function FundingTimeline({ data }: FundingTimelineProps) {
         data-testid="funding-timeline-empty"
         className="rounded-lg border bg-card p-6 text-sm text-muted-foreground"
       >
-        Funding timeline 데이터가 없습니다.
+        No funding timeline data available.
       </section>
     );
   }
 
   return (
-    <section data-testid="funding-timeline" className="rounded-lg border bg-card p-6">
-      <h3 className="text-sm font-semibold uppercase tracking-wide">Funding Timeline</h3>
-      <p className="text-xs text-muted-foreground">FED + AB + CRA gov-transfers per fiscal year</p>
-      <div className="mt-4 h-72 w-full">
+    <section
+      data-testid="funding-timeline"
+      className="rounded-xl border border-slate-200 bg-white p-6"
+    >
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <div>
+          <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-700">
+            Funding timeline
+          </h3>
+          <p className="mt-1 text-xs text-slate-500">
+            Stacked yearly totals across federal, Alberta, and CRA-reported government transfers
+            (last 10 fiscal years).
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-3 text-xs text-slate-600">
+          <span className="inline-flex items-center gap-1.5">
+            <span className="inline-block h-2.5 w-2.5 rounded-full bg-blue-700" aria-hidden />
+            FED
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <span className="inline-block h-2.5 w-2.5 rounded-full bg-red-700" aria-hidden />
+            AB
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <span className="inline-block h-2.5 w-2.5 rounded-full bg-green-700" aria-hidden />
+            CRA
+          </span>
+        </div>
+      </div>
+      <div className="mt-5 h-80 w-full">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="fiscal_year" tickFormatter={(v: number) => formatFiscalYear(v)} />
-            <YAxis tickFormatter={(v: number) => formatCAD(v, { compact: true })} />
+          <BarChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+            <XAxis
+              dataKey="fiscal_year"
+              tickFormatter={(v: number) => formatFiscalYear(v)}
+              stroke="#64748b"
+              fontSize={12}
+            />
+            <YAxis
+              tickFormatter={(v: number) => formatCAD(v, { compact: true })}
+              stroke="#64748b"
+              fontSize={12}
+            />
             <Tooltip
               formatter={(value: number) => formatCAD(value)}
               labelFormatter={(label: number) => formatFiscalYear(label)}
+              contentStyle={{
+                borderRadius: '8px',
+                border: '1px solid #e2e8f0',
+                fontSize: '13px',
+              }}
             />
-            <Legend />
+            <Legend wrapperStyle={{ fontSize: '12px' }} />
             <Bar dataKey="fed" name="FED" stackId="funds" fill={COLOR_FED} />
             <Bar dataKey="ab" name="AB" stackId="funds" fill={COLOR_AB} />
             <Bar dataKey="cra_govt" name="CRA Gov-Transfers" stackId="funds" fill={COLOR_CRA} />

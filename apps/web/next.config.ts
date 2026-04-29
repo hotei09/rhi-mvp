@@ -5,6 +5,8 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // SPEC-RHI-001 deploy fix: Render PG cold start이 60s 기본 timeout을 넘는 경우 대비
+  staticPageGenerationTimeout: 240,
 };
 
 export default nextConfig;

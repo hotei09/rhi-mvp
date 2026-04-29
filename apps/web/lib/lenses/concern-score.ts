@@ -75,13 +75,27 @@ export const CONCERN_TIER_THRESHOLDS = {
 } as const;
 
 /**
- * 가중치 yaml 파일의 canonical 위치 (project root 기준).
- * Vitest는 working directory가 apps/web이므로 ../../에서 시작.
+ * 가중치 yaml candidates — 빌드 환경별 cwd 차이 (local: apps/web, Vercel: monorepo root)에 대응.
  */
-const WEIGHTS_YAML_PATH = resolve(
-  process.cwd(),
-  '../../.moai/project/db/concern-score-weights.yaml',
-);
+const WEIGHTS_YAML_CANDIDATES = [
+  resolve(process.cwd(), '../../.moai/project/db/concern-score-weights.yaml'),
+  resolve(process.cwd(), '../.moai/project/db/concern-score-weights.yaml'),
+  resolve(process.cwd(), '.moai/project/db/concern-score-weights.yaml'),
+  resolve(process.cwd(), 'public/concern-score-weights.yaml'),
+];
+
+/**
+ * @MX:NOTE: [AUTO] hardcoded fallback — yaml 로드 실패 시 plan.md §2B.1 default seed로 복구
+ * @MX:REASON: Vercel build cold start 시 cwd 불일치로 yaml 못 찾는 경우 안전망. 운영 시 yaml 우선
+ * @MX:SPEC: SPEC-RHI-001 REQ-003 / AC-11
+ */
+const FALLBACK_WEIGHTS_YAML = `concern_score_weights:
+  zombie:       0.30
+  ghost:        0.25
+  loop:         0.20
+  director:     0.10
+  multi_source: 0.15
+`;
 
 /**
  * 5개 가중치 키 — 누락 검증에 사용.
@@ -154,7 +168,17 @@ let CACHED_WEIGHTS: ConcernWeights | undefined;
  */
 export function loadWeights(): ConcernWeights {
   if (CACHED_WEIGHTS) return CACHED_WEIGHTS;
-  const content = readFileSync(WEIGHTS_YAML_PATH, 'utf8');
+  let content: string | null = null;
+  for (const path of WEIGHTS_YAML_CANDIDATES) {
+    try {
+      content = readFileSync(path, 'utf8');
+      break;
+    } catch {
+      // 다음 후보 경로 시도
+    }
+  }
+  // 모든 candidate 실패 시 plan.md §2B.1 default seed로 복구
+  if (!content) content = FALLBACK_WEIGHTS_YAML;
   CACHED_WEIGHTS = parseAndValidateWeights(content);
   return CACHED_WEIGHTS;
 }

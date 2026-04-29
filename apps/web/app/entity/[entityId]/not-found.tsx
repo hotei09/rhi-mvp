@@ -7,12 +7,13 @@ import Link from 'next/link';
 export default function EntityNotFound() {
   return (
     <main className="mx-auto max-w-3xl px-6 py-16 text-center">
-      <h1 className="text-2xl font-semibold">엔티티를 찾을 수 없습니다</h1>
+      <h1 className="text-2xl font-semibold">Entity not found</h1>
       <p className="mt-2 text-sm text-muted-foreground">
-        요청한 BN이 CRA 식별 정보에 등록되어 있지 않습니다. BN 형식을 다시 확인해 주세요.
+        The requested BN is not registered in the CRA identification records. Please verify the BN
+        format.
       </p>
       <Link href="/" className="mt-6 inline-block text-sm underline">
-        홈으로 돌아가기
+        Back to home
       </Link>
     </main>
   );

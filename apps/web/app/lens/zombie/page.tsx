@@ -29,7 +29,8 @@ export default async function ZombieLensPage(): Promise<React.ReactElement> {
         <header className="mb-6">
           <h1 className="text-3xl font-bold tracking-tight text-gray-900">Zombie Recipients</h1>
           <p className="mt-2 text-sm text-gray-600">
-            정부 자금 (govt_share ≥ 0.7) 수령 후 filing 중단 패턴 — 단계별 점수 30/60/80/100.
+            Pattern: stopped filing after receiving government funding (govt_share ≥ 0.7) —
+            graduated score 30/60/80/100.
           </p>
         </header>
 
@@ -52,10 +53,10 @@ export default async function ZombieLensPage(): Promise<React.ReactElement> {
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-4 py-2 text-left font-semibold text-gray-700">#</th>
-                <th className="px-4 py-2 text-left font-semibold text-gray-700">단체명</th>
+                <th className="px-4 py-2 text-left font-semibold text-gray-700">Entity name</th>
                 <th className="px-4 py-2 text-left font-semibold text-gray-700">BN</th>
                 <th className="px-4 py-2 text-right font-semibold text-gray-700">Score</th>
-                <th className="px-4 py-2 text-right font-semibold text-gray-700">자금연도</th>
+                <th className="px-4 py-2 text-right font-semibold text-gray-700">Funding year</th>
                 <th className="px-4 py-2 text-right font-semibold text-gray-700">Total Funding</th>
               </tr>
             </thead>
@@ -63,7 +64,7 @@ export default async function ZombieLensPage(): Promise<React.ReactElement> {
               {rows.length === 0 && (
                 <tr>
                   <td colSpan={6} className="px-4 py-6 text-center text-gray-500">
-                    데이터 없음
+                    No data
                   </td>
                 </tr>
               )}

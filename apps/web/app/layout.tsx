@@ -11,7 +11,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: 'Recipient Health Index',
-  description: 'RHI MVP — 캐나다 정부 자금 수혜 단체 건강성 지표 (5개 렌즈 통합 분석)',
+  description:
+    'RHI MVP — Health index for Canadian government funding recipients (5-lens integrated analysis)',
 };
 
 export default function RootLayout({
@@ -20,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko" className={inter.variable}>
+    <html lang="en" className={inter.variable}>
       <body className="font-sans antialiased">{children}</body>
     </html>
   );

@@ -13,7 +13,7 @@ import { SearchBox } from './search-box';
  * 메인 네비게이션 항목.
  */
 const NAV_LINKS = [
-  { href: '/', label: '홈' },
+  { href: '/', label: 'Home' },
   { href: '/lens/zombie', label: 'Zombie' },
   { href: '/lens/ghost', label: 'Ghost' },
   { href: '/lens/loops', label: 'Loops' },

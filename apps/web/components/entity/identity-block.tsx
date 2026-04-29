@@ -54,28 +54,37 @@ export function IdentityBlock({
   const addressDisplay = addressParts.length > 0 ? addressParts.join(', ') : '—';
 
   return (
-    <section data-testid="identity-block" className="rounded-lg border bg-card p-6">
-      <h1 className="text-2xl font-semibold tracking-tight">{legal_name}</h1>
-      <dl className="mt-4 grid grid-cols-1 gap-3 text-sm sm:grid-cols-2">
+    <section
+      data-testid="identity-block"
+      className="rounded-xl border border-slate-200 bg-white p-6"
+    >
+      <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-700">Identity</h2>
+      <dl className="mt-4 grid grid-cols-1 gap-4 text-sm sm:grid-cols-2">
         <div>
-          <dt className="text-xs uppercase tracking-wide text-muted-foreground">BN</dt>
-          <dd className="mt-1 font-mono">{bn}</dd>
+          <dt className="text-xs uppercase tracking-wide text-slate-500">BN</dt>
+          <dd className="mt-1 font-mono text-slate-900">{bn}</dd>
         </div>
         <div>
-          <dt className="text-xs uppercase tracking-wide text-muted-foreground">Category</dt>
-          <dd className="mt-1">{category ?? '—'}</dd>
+          <dt className="text-xs uppercase tracking-wide text-slate-500">Legal name</dt>
+          <dd className="mt-1 font-medium text-slate-900">{legal_name}</dd>
         </div>
         <div>
-          <dt className="text-xs uppercase tracking-wide text-muted-foreground">Designation</dt>
-          <dd className="mt-1">{designationLabel(designation)}</dd>
+          <dt className="text-xs uppercase tracking-wide text-slate-500">Category</dt>
+          <dd className="mt-1 text-slate-700">{category ?? '—'}</dd>
         </div>
         <div>
-          <dt className="text-xs uppercase tracking-wide text-muted-foreground">Registration</dt>
-          <dd className="mt-1">{registration_date ? formatDate(registration_date) : '—'}</dd>
+          <dt className="text-xs uppercase tracking-wide text-slate-500">Designation</dt>
+          <dd className="mt-1 text-slate-700">{designationLabel(designation)}</dd>
+        </div>
+        <div>
+          <dt className="text-xs uppercase tracking-wide text-slate-500">Registration</dt>
+          <dd className="mt-1 text-slate-700">
+            {registration_date ? formatDate(registration_date) : '—'}
+          </dd>
         </div>
         <div className="sm:col-span-2">
-          <dt className="text-xs uppercase tracking-wide text-muted-foreground">Address</dt>
-          <dd className="mt-1">{addressDisplay}</dd>
+          <dt className="text-xs uppercase tracking-wide text-slate-500">Address</dt>
+          <dd className="mt-1 text-slate-700">{addressDisplay}</dd>
         </div>
       </dl>
     </section>

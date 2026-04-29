@@ -53,10 +53,10 @@ export function MethodologyPopover() {
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-black/40" />
         <Dialog.Content className="fixed left-1/2 top-1/2 max-h-[80vh] w-[90vw] max-w-2xl -translate-x-1/2 -translate-y-1/2 overflow-auto rounded-lg bg-white p-6 shadow-xl dark:bg-neutral-900">
-          <Dialog.Title className="text-lg font-semibold">Concern Score 공식</Dialog.Title>
+          <Dialog.Title className="text-lg font-semibold">Concern Score formula</Dialog.Title>
           <div className="mt-4 space-y-4 text-sm">
             <div>
-              <h4 className="font-semibold">가중합 공식</h4>
+              <h4 className="font-semibold">Weighted-sum formula</h4>
               <pre className="mt-1 rounded bg-muted/50 p-2 text-xs">
                 {`score = w_zombie · zombie_score
       + w_ghost · ghost_score
@@ -66,7 +66,7 @@ export function MethodologyPopover() {
               </pre>
             </div>
             <div>
-              <h4 className="font-semibold">가중치 (sum = 1.0)</h4>
+              <h4 className="font-semibold">Weights (sum = 1.0)</h4>
               <table className="mt-1 w-full text-left">
                 <tbody>
                   {DISPLAYED_WEIGHTS.map((w) => (
@@ -79,7 +79,7 @@ export function MethodologyPopover() {
               </table>
             </div>
             <div>
-              <h4 className="font-semibold">Tier 임계값 (ascending)</h4>
+              <h4 className="font-semibold">Tier thresholds (ascending)</h4>
               <ul className="mt-1 space-y-1 text-xs">
                 <li>Critical ≥ {TIER_THRESHOLDS.CRITICAL}</li>
                 <li>

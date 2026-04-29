@@ -94,7 +94,9 @@ export default async function LoopDetailPage({ params }: PageProps): Promise<Rea
         </header>
 
         <section className="mb-6 rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-700">분류 근거</h2>
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-700">
+            Classification rationale
+          </h2>
           <ul className="mt-2 list-inside list-disc space-y-1 text-sm text-gray-700">
             {classification.classification_reasons.map((reason) => (
               <li key={reason}>{reason}</li>
@@ -102,7 +104,7 @@ export default async function LoopDetailPage({ params }: PageProps): Promise<Rea
           </ul>
           {classification.avg_program_ratio !== null && (
             <p className="mt-3 text-xs text-gray-500">
-              평균 program ratio: {(classification.avg_program_ratio * 100).toFixed(1)}%
+              Average program ratio: {(classification.avg_program_ratio * 100).toFixed(1)}%
             </p>
           )}
         </section>

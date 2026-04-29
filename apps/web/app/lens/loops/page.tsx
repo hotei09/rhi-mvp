@@ -33,8 +33,8 @@ export default async function LoopsLensPage(): Promise<React.ReactElement> {
         <header className="mb-6">
           <h1 className="text-3xl font-bold tracking-tight text-gray-900">Funding Loops</h1>
           <p className="mt-2 text-sm text-gray-600">
-            자금 순환 패턴 (cycle 분석). Tier A: 합법 (internal hierarchy/known hub). Tier C: 의심
-            (data-quality flag 또는 cross-org).
+            Funding cycle patterns (cycle analysis). Tier A: legitimate (internal hierarchy / known
+            hub). Tier C: concerning (data-quality flag or cross-org).
           </p>
         </header>
 
@@ -47,9 +47,9 @@ export default async function LoopsLensPage(): Promise<React.ReactElement> {
               <div className="text-xs font-semibold uppercase">Tier {tier}</div>
               <div className="mt-1 text-3xl font-bold tabular-nums">{tierCounts[tier]}</div>
               <div className="mt-1 text-xs">
-                {tier === 'A' && '합법 (internal/hub)'}
-                {tier === 'B' && '관찰'}
-                {tier === 'C' && '의심'}
+                {tier === 'A' && 'Legitimate (internal/hub)'}
+                {tier === 'B' && 'Observation'}
+                {tier === 'C' && 'Concerning'}
               </div>
             </div>
           ))}
@@ -64,14 +64,14 @@ export default async function LoopsLensPage(): Promise<React.ReactElement> {
                 <th className="px-4 py-2 text-right font-semibold text-gray-700">Hops</th>
                 <th className="px-4 py-2 text-right font-semibold text-gray-700">Total Flow</th>
                 <th className="px-4 py-2 text-left font-semibold text-gray-700">Tier</th>
-                <th className="px-4 py-2 text-left font-semibold text-gray-700">근거</th>
+                <th className="px-4 py-2 text-left font-semibold text-gray-700">Rationale</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
               {rows.length === 0 && (
                 <tr>
                   <td colSpan={6} className="px-4 py-6 text-center text-gray-500">
-                    데이터 없음
+                    No data
                   </td>
                 </tr>
               )}

@@ -59,7 +59,8 @@ export function SearchBox(): React.ReactElement {
       <input
         type="search"
         data-testid="global-search-input"
-        placeholder="단체명 또는 BN 검색"
+        placeholder="Search by name or BN..."
+        aria-label="Search by name or BN"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         onFocus={() => results.length > 0 && setOpen(true)}
@@ -71,9 +72,9 @@ export function SearchBox(): React.ReactElement {
           data-testid="global-search-results"
           className="absolute z-50 mt-1 max-h-96 w-full overflow-auto rounded-md border border-gray-200 bg-white shadow-lg"
         >
-          {loading && <div className="px-3 py-2 text-xs text-gray-500">검색 중...</div>}
+          {loading && <div className="px-3 py-2 text-xs text-gray-500">Searching...</div>}
           {!loading && results.length === 0 && (
-            <div className="px-3 py-2 text-xs text-gray-500">결과 없음</div>
+            <div className="px-3 py-2 text-xs text-gray-500">No results</div>
           )}
           {!loading && results.length > 0 && (
             <ul className="divide-y divide-gray-100">
@@ -91,7 +92,7 @@ export function SearchBox(): React.ReactElement {
                     >
                       <div className="font-medium text-gray-900">{r.canonical_name}</div>
                       <div className="mt-0.5 text-xs text-gray-500">
-                        {r.bn_root ? `BN ${r.bn_root}` : 'BN 미상'}
+                        {r.bn_root ? `BN ${r.bn_root}` : 'BN unknown'}
                         {sources ? ` · ${sources.toUpperCase()}` : ''}
                       </div>
                     </a>

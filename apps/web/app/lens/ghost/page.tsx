@@ -21,8 +21,8 @@ export default async function GhostLensPage(): Promise<React.ReactElement> {
         <header className="mb-6">
           <h1 className="text-3xl font-bold tracking-tight text-gray-900">Ghost Recipients</h1>
           <p className="mt-2 text-sm text-gray-600">
-            program_ratio &lt; 0.5 + govt_share ≥ 0.7 + 12개월 이상 등록된 단체 — 운영비 구성 의심
-            패턴.
+            Pattern: program_ratio &lt; 0.5 + govt_share ≥ 0.7 + registered for at least 12 months —
+            suspicious overhead composition.
           </p>
         </header>
 
@@ -31,7 +31,7 @@ export default async function GhostLensPage(): Promise<React.ReactElement> {
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-4 py-2 text-left font-semibold text-gray-700">#</th>
-                <th className="px-4 py-2 text-left font-semibold text-gray-700">단체명</th>
+                <th className="px-4 py-2 text-left font-semibold text-gray-700">Entity name</th>
                 <th className="px-4 py-2 text-left font-semibold text-gray-700">BN</th>
                 <th className="px-4 py-2 text-right font-semibold text-gray-700">Score</th>
                 <th className="px-4 py-2 text-right font-semibold text-gray-700">Program Ratio</th>
@@ -42,7 +42,7 @@ export default async function GhostLensPage(): Promise<React.ReactElement> {
               {rows.length === 0 && (
                 <tr>
                   <td colSpan={6} className="px-4 py-6 text-center text-gray-500">
-                    데이터 없음
+                    No data
                   </td>
                 </tr>
               )}

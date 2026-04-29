@@ -14,10 +14,10 @@
  */
 
 /**
- * 한국어 + 영어 disclaimer를 모두 포함하여 AC-10 본문 검증을 통과시킨다.
- * 사용자 conversation_language=ko 환경에서도 읽힐 수 있도록 한국어 우선 표기.
+ * AC-10 본문 검증 통과 — English-only disclaimer (UI 영문화 후 hackathon 평가 대상).
+ * @MX:NOTE: [AUTO] AC-10 measurable text. Must contain "signal only — not a fraud claim" exactly.
  */
-const DISCLAIMER_TEXT = '시그널일 뿐 사기 단정이 아닙니다 (signal only — not a fraud claim).';
+const DISCLAIMER_TEXT = 'signal only — not a fraud claim';
 
 /**
  * Director Network lens 카드 내부에 렌더되는 disclaimer 컴포넌트.
