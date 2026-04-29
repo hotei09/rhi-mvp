@@ -1,0 +1,11 @@
+# Concern Score Weights — canonical seed for SPEC-RHI-001 REQ-003
+# Source: plan.md §2B.1 (출처: product.md §6 + db/seed-data.md §3)
+# Boot-time validation: abs(sum - 1.0) <= 0.001 (apps/web/lib/lenses/concern-score.ts)
+
+concern_score_weights:
+  zombie:       0.30
+  ghost:        0.25
+  loop:         0.20
+  director:     0.10
+  multi_source: 0.15
+# Sum = 1.00
