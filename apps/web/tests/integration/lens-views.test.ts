@@ -94,6 +94,42 @@ describe('AC-9 reinforcement — 정부 엔티티 exclusion (REQ-002)', () => {
     expect(result.score).toBe(0);
     expect(result.raw).toBeNull();
   }, 30_000);
+
+  // v0.1.4: 신규 health-body 패턴 검증 — sample-entities.ts 경험적 발견.
+  // 3개 패턴 (Hospital / Hopital / Centre Intégré)을 단일 테스트로 묶어 DB connection 부담 최소화.
+  // (이전 design: 패턴마다 별도 it 블록 → Director Overlap 테스트가 30s timeout에 근접하던 회귀 발생)
+  it('v0.1.4 — 신규 health-body 패턴 (Hospital/Hopital/Centre Intégré) 매칭 BN은 zombie/ghost 순위에서 자동 제외', async () => {
+    const { sql } = await import('@/lib/db/client');
+    const { getZombieScore } = await import('@/lib/lenses/zombie');
+
+    // 신규 3개 패턴 검증 — 각 패턴에서 1건 sample 추출 후 zombie score = 0 확인
+    const patterns = ['%Hospital%', '%Hopital%', '%Centre Intégré%'];
+    const verifiedSamples: Array<{ pattern: string; bn: string; legal_name: string }> = [];
+
+    for (const pattern of patterns) {
+      const sample = (await sql.unsafe(
+        `SELECT bn, legal_name FROM cra.cra_identification WHERE legal_name ILIKE '${pattern}' LIMIT 1`,
+      )) as Array<{ bn: string; legal_name: string }>;
+      if (sample.length === 0 || !sample[0]) {
+        console.log(`[AC-9 v0.1.4] pattern "${pattern}" no entity in DB — skip`);
+        continue;
+      }
+      verifiedSamples.push({ pattern, bn: sample[0].bn, legal_name: sample[0].legal_name });
+    }
+
+    // 적어도 1개 패턴은 실제 데이터에 매칭되어야 함 — 모두 0이면 신규 패턴이 무의미
+    expect(verifiedSamples.length).toBeGreaterThan(0);
+
+    // 매칭된 sample에 대해 zombie_score = 0 검증
+    for (const sample of verifiedSamples) {
+      const result = await getZombieScore(sample.bn);
+      console.log(
+        `[AC-9 v0.1.4] pattern "${sample.pattern}" BN ${sample.bn} (${sample.legal_name}) zombie_score=${result.score}`,
+      );
+      expect(result.score).toBe(0);
+      expect(result.raw).toBeNull();
+    }
+  }, 60_000);
 });
 
 describe('REQ-002 Lens 4 — Director Overlap (signal only)', () => {

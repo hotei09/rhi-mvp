@@ -95,7 +95,7 @@ describe('AC-9 — 정부 엔티티 자동 제외', () => {
     expect(result.length).toBe(0);
   }, 15_000);
 
-  it('6개 정부 패턴 각각이 sample 엔티티를 제외', async () => {
+  it('12개 정부+보건단체 패턴 각각이 sample 엔티티를 제외 (v0.1.4)', async () => {
     const { sql } = await import('@/lib/db/client');
     const { EXCLUDED_LEGAL_NAME_PATTERNS } = await import('@/lib/data-issues/safe-queries');
 
@@ -109,7 +109,8 @@ describe('AC-9 — 정부 엔티티 자동 제외', () => {
       console.log(`[AC-9] pattern "${pattern}" matches ${cnt} entities`);
       if (cnt > 0) matchedPatternCount++;
     }
-    // 6개 중 적어도 4개 이상의 패턴이 실제 데이터를 매칭해야 함
-    expect(matchedPatternCount).toBeGreaterThanOrEqual(4);
-  }, 30_000);
+    // v0.1.4: 12개 중 적어도 8개 이상의 패턴이 실제 데이터를 매칭해야 함
+    // (v0.1.0 4/6 → v0.1.4 8/12, 두 배수 비율 유지)
+    expect(matchedPatternCount).toBeGreaterThanOrEqual(8);
+  }, 60_000);
 });

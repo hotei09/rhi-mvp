@@ -6,12 +6,12 @@ import '../setup-env';
 import { describe, expect, it } from 'vitest';
 
 describe('lib/data-issues/safe-queries — EXCLUDED_LEGAL_NAME_PATTERNS', () => {
-  it('contains 6 government exclusion patterns', async () => {
+  it('contains 12 government and health-body exclusion patterns (v0.1.4)', async () => {
     const { EXCLUDED_LEGAL_NAME_PATTERNS } = await import('@/lib/data-issues/safe-queries');
-    expect(EXCLUDED_LEGAL_NAME_PATTERNS).toHaveLength(6);
+    expect(EXCLUDED_LEGAL_NAME_PATTERNS).toHaveLength(12);
   });
 
-  it('includes the canonical govt patterns from queries.md §1', async () => {
+  it('includes the canonical govt patterns from queries.md §1 (v0.1.0 — 6개)', async () => {
     const { EXCLUDED_LEGAL_NAME_PATTERNS } = await import('@/lib/data-issues/safe-queries');
     expect(EXCLUDED_LEGAL_NAME_PATTERNS).toContain('Government of %');
     expect(EXCLUDED_LEGAL_NAME_PATTERNS).toContain('%Health Authority%');
@@ -19,6 +19,17 @@ describe('lib/data-issues/safe-queries — EXCLUDED_LEGAL_NAME_PATTERNS', () => 
     expect(EXCLUDED_LEGAL_NAME_PATTERNS).toContain('City of %');
     expect(EXCLUDED_LEGAL_NAME_PATTERNS).toContain('Town of %');
     expect(EXCLUDED_LEGAL_NAME_PATTERNS).toContain('Municipality of %');
+  });
+
+  it('includes additional health-body patterns (v0.1.4 — 신규 6개)', async () => {
+    // v0.1.4: sample-entities.ts 추출에서 health bodies가 zombie top 10을 차지한 false positive 해결.
+    const { EXCLUDED_LEGAL_NAME_PATTERNS } = await import('@/lib/data-issues/safe-queries');
+    expect(EXCLUDED_LEGAL_NAME_PATTERNS).toContain('%Hospital%');
+    expect(EXCLUDED_LEGAL_NAME_PATTERNS).toContain('%Hopital%');
+    expect(EXCLUDED_LEGAL_NAME_PATTERNS).toContain('%Health Services%');
+    expect(EXCLUDED_LEGAL_NAME_PATTERNS).toContain('%Santé%');
+    expect(EXCLUDED_LEGAL_NAME_PATTERNS).toContain('%Centre Intégré%');
+    expect(EXCLUDED_LEGAL_NAME_PATTERNS).toContain('%Shared Health%');
   });
 
   it('is a readonly array (frozen)', async () => {
@@ -36,17 +47,25 @@ describe('lib/data-issues/safe-queries — buildGovtExclusionClause', () => {
     expect(clause.endsWith(')')).toBe(true);
   });
 
-  it('joins 6 NOT ILIKE expressions with AND', async () => {
+  it('joins 12 NOT ILIKE expressions with AND (v0.1.4)', async () => {
     const { buildGovtExclusionClause } = await import('@/lib/data-issues/safe-queries');
     const clause = buildGovtExclusionClause('legal_name');
+    // v0.1.0 govt 6개
     expect(clause).toContain("legal_name NOT ILIKE 'Government of %'");
     expect(clause).toContain("legal_name NOT ILIKE '%Health Authority%'");
     expect(clause).toContain("legal_name NOT ILIKE '%Crown Corporation%'");
     expect(clause).toContain("legal_name NOT ILIKE 'City of %'");
     expect(clause).toContain("legal_name NOT ILIKE 'Town of %'");
     expect(clause).toContain("legal_name NOT ILIKE 'Municipality of %'");
-    // 6개 NOT ILIKE → 5개 AND 연결자
-    expect(clause.match(/ AND /g)?.length).toBe(5);
+    // v0.1.4 health bodies 6개 신규
+    expect(clause).toContain("legal_name NOT ILIKE '%Hospital%'");
+    expect(clause).toContain("legal_name NOT ILIKE '%Hopital%'");
+    expect(clause).toContain("legal_name NOT ILIKE '%Health Services%'");
+    expect(clause).toContain("legal_name NOT ILIKE '%Santé%'");
+    expect(clause).toContain("legal_name NOT ILIKE '%Centre Intégré%'");
+    expect(clause).toContain("legal_name NOT ILIKE '%Shared Health%'");
+    // 12개 NOT ILIKE → 11개 AND 연결자
+    expect(clause.match(/ AND /g)?.length).toBe(11);
   });
 
   it('handles qualified column aliases (e.g., m.legal_name)', async () => {

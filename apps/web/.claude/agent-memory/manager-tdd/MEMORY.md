@@ -2,3 +2,5 @@
 - [Vitest jsdom config](vitest_dual_env.md) — how this repo runs Node + jsdom together
 - [Coverage compromise](coverage_thresholds.md) — branch threshold is 75, why
 - [Phase 4 DB quirks](phase4_db_schema_quirks.md) — vw_entity_search columns differ from queries.md docs
+- [Director Overlap flaky test](director_overlap_flaky.md) — pre-existing 30s timeout flakiness, not regression
+- [v0.1.4 patterns insufficient](spec_rhi_v014_findings.md) — 6 new patterns added but %Health Sciences% etc. still need follow-up

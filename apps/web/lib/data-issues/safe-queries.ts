@@ -7,26 +7,46 @@
  */
 
 /**
- * 정부 엔티티 제외에 사용하는 ILIKE 패턴.
+ * 정부 엔티티 + 보건단체 제외에 사용하는 ILIKE 패턴 (v0.1.4: 6 → 12개로 확장).
  * legal_name 컬럼에 대해 NOT ILIKE로 적용 — schema.md §7에 따르면 category 기반 필터는 부정확하며
  * legal_name 패턴이 authoritative.
  *
+ * v0.1.0 — 정부 엔티티 6개 (queries.md §1 canonical):
  * - 'Government of %': 연방·주 정부
  * - '%Health Authority%': 보건당국 (Alberta Health Services 등)
  * - '%Crown Corporation%': 크라운 법인 (Canada Post 등)
  * - 'City of %': 광역시
  * - 'Town of %': 일반시
  * - 'Municipality of %': 지자체
+ *
+ * v0.1.4 — 보건단체 / 병원 6개 신규 (sample-entities.ts 경험적 발견):
+ * - '%Hospital%': 영문 병원 (PROVINCIAL HEALTH SERVICES AUTHORITY는 매칭 안 됨, 별도)
+ * - '%Hopital%': Quebec 프랑스어 병원 (HOPITAL JEFFERY HALE)
+ * - '%Health Services%': PROVINCIAL HEALTH SERVICES AUTHORITY 등
+ * - '%Santé%': Quebec 프랑스어 보건단체 (Centre Intégré de Santé)
+ * - '%Centre Intégré%': Quebec CIUSSS / CISSS 통합 보건사회서비스센터
+ * - '%Shared Health%': Manitoba Shared Health
+ *
+ * 추가 배경: zombie top 10이 PROVINCIAL HEALTH SERVICES AUTHORITY / HOPITAL JEFFERY HALE 등으로
+ * 가득 차 발표용 후보로 부적합 — health body 자동 제외 후 charity/non-profit이 남도록 함.
  */
-// @MX:NOTE: [AUTO] 정부 엔티티 6개 패턴 — queries.md §1 + rls-policies.md §3.1 canonical list. category 기반 필터는 schema.md §7에 따라 부정확하므로 legal_name 패턴이 authoritative. 추가 시 acceptance.md AC-9도 갱신.
-// @MX:SPEC: SPEC-RHI-001 REQ-001 / AC-9
+// @MX:NOTE: [AUTO] 정부+보건단체 12개 패턴 (v0.1.4) — v0.1.0 govt 6 + v0.1.4 health 6. queries.md §1 + sample-entities.ts 경험적 발견 (Phase 5 post-sync). category 기반 필터는 schema.md §7에 따라 부정확하므로 legal_name 패턴이 authoritative. 추가 시 acceptance.md AC-9 + 본 SPEC HISTORY도 갱신.
+// @MX:SPEC: SPEC-RHI-001 v0.1.4 REQ-001 / AC-9
 export const EXCLUDED_LEGAL_NAME_PATTERNS = Object.freeze([
+  // v0.1.0 — 정부 6개
   'Government of %',
   '%Health Authority%',
   '%Crown Corporation%',
   'City of %',
   'Town of %',
   'Municipality of %',
+  // v0.1.4 — 보건단체 6개 신규 (sample-entities.ts 추출 경험적 발견)
+  '%Hospital%',
+  '%Hopital%',
+  '%Health Services%',
+  '%Santé%',
+  '%Centre Intégré%',
+  '%Shared Health%',
 ] as const);
 
 /**

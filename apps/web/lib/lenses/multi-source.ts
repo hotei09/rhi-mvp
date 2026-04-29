@@ -45,7 +45,11 @@ export async function getMultiSourceFunding(entityId: string): Promise<MultiSour
       AND esl.source_schema = 'fed'
   `);
 
-  // AB 합계 — dedup 불필요 (queries.md §7)
+  // AB 합계 — dedup 불필요 (queries.md §7).
+  // v0.1.4: source_pk UUID/int 혼재 방어 — esl.source_pk->>'id'가 UUID 형식인 행이 ab_grants.id (int) cast 시
+  // "invalid input syntax for type integer: <UUID>" 에러를 silent drop로 흘려보내지 않도록
+  // 사전 numeric 필터 (`~ '^[0-9]+$'`) 적용. sample-entities.ts에서 동일 패턴으로 검증됨.
+  // @MX:NOTE: [AUTO] AB source_pk numeric guard (v0.1.4) — source_pk->>'id'가 UUID인 행은 ab_grants.id (int) 매칭 불가능, 사전 정규식 필터로 silent JOIN failure 방지. SPEC-RHI-001 v0.1.4 Phase 5 post-sync 발견.
   const abQuery = `
     SELECT COALESCE(SUM(ab.amount)::float8, 0) AS ab_total
     FROM ab.ab_grants ab
@@ -53,6 +57,7 @@ export async function getMultiSourceFunding(entityId: string): Promise<MultiSour
       ON (esl.source_pk->>'id')::int = ab.id
     WHERE esl.entity_id = $1
       AND esl.source_schema = 'ab'
+      AND (esl.source_pk->>'id') ~ '^[0-9]+$'
   `;
 
   // CRA gov-transfers 합계
@@ -79,12 +84,14 @@ export async function getMultiSourceFunding(entityId: string): Promise<MultiSour
         AND fc.agreement_value > 0
     ),
     ab_yearly AS (
+      -- v0.1.4: source_pk UUID/int 혼재 방어 — abQuery와 동일한 사전 numeric 필터 적용
       SELECT EXTRACT(YEAR FROM ab.payment_date)::int AS yr
       FROM ab.ab_grants ab
       JOIN general.entity_source_links esl
         ON (esl.source_pk->>'id')::int = ab.id
       WHERE esl.entity_id = $1
         AND esl.source_schema = 'ab'
+        AND (esl.source_pk->>'id') ~ '^[0-9]+$'
         AND ab.amount > 0
     ),
     cra_yearly AS (

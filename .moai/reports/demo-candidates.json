@@ -1,0 +1,313 @@
+{
+  "generated_at": "2026-04-29T01:39:52.770Z",
+  "zombie": [
+    {
+      "bn": "867435497RR0001",
+      "legal_name": "HAMILTON HEALTH SCIENCES CORPORATION",
+      "zombie_score": 100,
+      "last_fpe": "2024-03-31T00:00:00.000Z",
+      "last_funding_year": 2024,
+      "total_funding": 7410198814,
+      "months_since_filing": 24
+    },
+    {
+      "bn": "141078212RR0001",
+      "legal_name": "CHU de Québec - Université Laval",
+      "zombie_score": 100,
+      "last_fpe": "2024-03-31T00:00:00.000Z",
+      "last_funding_year": 2024,
+      "total_funding": 6901785329,
+      "months_since_filing": 24
+    },
+    {
+      "bn": "108161779RR0001",
+      "legal_name": "UNIVERSITY OF BRITISH COLUMBIA",
+      "zombie_score": 100,
+      "last_fpe": "2024-03-31T00:00:00.000Z",
+      "last_funding_year": 2024,
+      "total_funding": 6888185607,
+      "months_since_filing": 24
+    },
+    {
+      "bn": "870157641RR0001",
+      "legal_name": "CANADIAN BLOOD SERVICES / SOCIETE CANADIENNE DU SANG",
+      "zombie_score": 100,
+      "last_fpe": "2024-03-31T00:00:00.000Z",
+      "last_funding_year": 2024,
+      "total_funding": 6522042313,
+      "months_since_filing": 24
+    },
+    {
+      "bn": "887657153RR0001",
+      "legal_name": "LONDON HEALTH SCIENCES CENTRE",
+      "zombie_score": 100,
+      "last_fpe": "2024-03-31T00:00:00.000Z",
+      "last_funding_year": 2024,
+      "total_funding": 6218182000,
+      "months_since_filing": 24
+    },
+    {
+      "bn": "119043628RR0001",
+      "legal_name": "TRILLIUM HEALTH PARTNERS",
+      "zombie_score": 100,
+      "last_fpe": "2024-03-31T00:00:00.000Z",
+      "last_funding_year": 2024,
+      "total_funding": 6091118765,
+      "months_since_filing": 24
+    },
+    {
+      "bn": "108032533RR0001",
+      "legal_name": "UNITY HEALTH TORONTO",
+      "zombie_score": 100,
+      "last_fpe": "2024-03-31T00:00:00.000Z",
+      "last_funding_year": 2024,
+      "total_funding": 5797519694,
+      "months_since_filing": 24
+    },
+    {
+      "bn": "873465728RR0001",
+      "legal_name": "PROVIDENCE HEALTH CARE SOCIETY",
+      "zombie_score": 100,
+      "last_fpe": "2024-03-31T00:00:00.000Z",
+      "last_funding_year": 2024,
+      "total_funding": 5663960000,
+      "months_since_filing": 24
+    },
+    {
+      "bn": "108051541RR0002",
+      "legal_name": "SUNNYBROOK HEALTH SCIENCES CENTRE",
+      "zombie_score": 100,
+      "last_fpe": "2024-03-31T00:00:00.000Z",
+      "last_funding_year": 2024,
+      "total_funding": 5572091342,
+      "months_since_filing": 24
+    },
+    {
+      "bn": "108102831RR0001",
+      "legal_name": "THE GOVERNORS OF THE UNIVERSITY OF ALBERTA",
+      "zombie_score": 100,
+      "last_fpe": "2024-03-31T00:00:00.000Z",
+      "last_funding_year": 2024,
+      "total_funding": 4806985000,
+      "months_since_filing": 24
+    }
+  ],
+  "loop_tier_c": [
+    {
+      "loop_id": 252,
+      "hops": 2,
+      "total_flow": 10574080,
+      "path_display": "119228864RR0002 → 868346966RR0001",
+      "classification_reasons": [
+        "cross-organization loop with low/null program ratio (no hub, no flag)"
+      ],
+      "distinct_bn_roots": 2,
+      "has_plausibility_flag": false
+    },
+    {
+      "loop_id": 414,
+      "hops": 2,
+      "total_flow": 9712920,
+      "path_display": "757680673RR0001 → 892345422RR0001",
+      "classification_reasons": [
+        "cross-organization loop with low/null program ratio (no hub, no flag)"
+      ],
+      "distinct_bn_roots": 2,
+      "has_plausibility_flag": false
+    },
+    {
+      "loop_id": 586,
+      "hops": 3,
+      "total_flow": 5952223,
+      "path_display": "708625934RR0001 → 711905075RR0001 → 716178736RR0001",
+      "classification_reasons": [
+        "cross-organization loop with low/null program ratio (no hub, no flag)"
+      ],
+      "distinct_bn_roots": 3,
+      "has_plausibility_flag": false
+    },
+    {
+      "loop_id": 383,
+      "hops": 2,
+      "total_flow": 5151700,
+      "path_display": "709984942RR0001 → 836671065RR0001",
+      "classification_reasons": [
+        "cross-organization loop with low/null program ratio (no hub, no flag)"
+      ],
+      "distinct_bn_roots": 2,
+      "has_plausibility_flag": false
+    },
+    {
+      "loop_id": 695,
+      "hops": 3,
+      "total_flow": 4105815,
+      "path_display": "703072603RR0001 → 887384352RR0001 → 871098919RR0001",
+      "classification_reasons": [
+        "cross-organization loop with low/null program ratio (no hub, no flag)"
+      ],
+      "distinct_bn_roots": 3,
+      "has_plausibility_flag": false
+    },
+    {
+      "loop_id": 3251,
+      "hops": 6,
+      "total_flow": 3458185,
+      "path_display": "108074436RR0001 → 119075638RR0001 → 868947797RR0001 → … (2 more) → 768362147RR0001",
+      "classification_reasons": [
+        "cross-organization loop with low/null program ratio (no hub, no flag)"
+      ],
+      "distinct_bn_roots": 6,
+      "has_plausibility_flag": false
+    },
+    {
+      "loop_id": 1569,
+      "hops": 5,
+      "total_flow": 2994201,
+      "path_display": "108155797RR0002 → 839545803RR0001 → 865538532RR0001 → 119239317RR0001 → 134593391RR0001",
+      "classification_reasons": [
+        "cross-organization loop with low/null program ratio (no hub, no flag)"
+      ],
+      "distinct_bn_roots": 5,
+      "has_plausibility_flag": false
+    },
+    {
+      "loop_id": 4898,
+      "hops": 6,
+      "total_flow": 2894119,
+      "path_display": "119273472RR0001 → 889896924RR0001 → 833062144RR0001 → … (2 more) → 898992151RR0001",
+      "classification_reasons": [
+        "cross-organization loop with low/null program ratio (no hub, no flag)"
+      ],
+      "distinct_bn_roots": 6,
+      "has_plausibility_flag": false
+    },
+    {
+      "loop_id": 1162,
+      "hops": 4,
+      "total_flow": 2422768,
+      "path_display": "130560188RR0001 → 893626242RR0001 → 868947797RR0001 → 732323126RR0001",
+      "classification_reasons": [
+        "cross-organization loop with low/null program ratio (no hub, no flag)"
+      ],
+      "distinct_bn_roots": 4,
+      "has_plausibility_flag": false
+    }
+  ],
+  "multi_source": [
+    {
+      "bn": "890943673RR0001",
+      "legal_name": "KIDSABILITY CENTRE FOR CHILD DEVELOPMENT FOUNDATION",
+      "concern_score": 50,
+      "tier": "Medium",
+      "components": {
+        "zombie_score": 0,
+        "ghost_score": 100,
+        "loop_signal": 0,
+        "director_overlap": 43,
+        "multi_source_count": 2
+      }
+    },
+    {
+      "bn": "108102435RR0003",
+      "legal_name": "THE UNITED CHURCH OF CANADA",
+      "concern_score": 42.5,
+      "tier": "Medium",
+      "components": {
+        "zombie_score": 0,
+        "ghost_score": 30,
+        "loop_signal": 50,
+        "director_overlap": 43,
+        "multi_source_count": 2
+      }
+    },
+    {
+      "bn": "119276723RR0001",
+      "legal_name": "UNITED JEWISH APPEAL OF GREATER TORONTO",
+      "concern_score": 35,
+      "tier": "Low",
+      "components": {
+        "zombie_score": 0,
+        "ghost_score": 0,
+        "loop_signal": 50,
+        "director_overlap": 44,
+        "multi_source_count": 2
+      }
+    },
+    {
+      "bn": "107449902RR0001",
+      "legal_name": "GREATER VANCOUVER YOUTH FOR CHRIST",
+      "concern_score": 25,
+      "tier": "Low",
+      "components": {
+        "zombie_score": 0,
+        "ghost_score": 0,
+        "loop_signal": 0,
+        "director_overlap": 12,
+        "multi_source_count": 2
+      }
+    },
+    {
+      "bn": "851105361RR0001",
+      "legal_name": "ALPHA Education",
+      "concern_score": 25,
+      "tier": "Low",
+      "components": {
+        "zombie_score": 0,
+        "ghost_score": 0,
+        "loop_signal": 0,
+        "director_overlap": 29,
+        "multi_source_count": 2
+      }
+    },
+    {
+      "bn": "119215036RR0001",
+      "legal_name": "CANADIAN BAPTISTS OF WESTERN CANADA",
+      "concern_score": 25,
+      "tier": "Low",
+      "components": {
+        "zombie_score": 0,
+        "ghost_score": 0,
+        "loop_signal": 0,
+        "director_overlap": 27,
+        "multi_source_count": 2
+      }
+    },
+    {
+      "bn": "806665014RR0001",
+      "legal_name": "A Better Life Foundation",
+      "concern_score": 22,
+      "tier": "Low",
+      "components": {
+        "zombie_score": 0,
+        "ghost_score": 0,
+        "loop_signal": 0,
+        "director_overlap": 7,
+        "multi_source_count": 2
+      }
+    },
+    {
+      "bn": "827110008RR0001",
+      "legal_name": "Made by Momma",
+      "concern_score": 17,
+      "tier": "Healthy",
+      "components": {
+        "zombie_score": 0,
+        "ghost_score": 0,
+        "loop_signal": 0,
+        "director_overlap": 2,
+        "multi_source_count": 2
+      }
+    }
+  ],
+  "metadata": {
+    "zombie_threshold_used": 80,
+    "multi_source_strategy": "zombie ∩ multi_source>=2 → top 10 by concern_score",
+    "notes": [
+      "F-3 dedup 적용 (FED 합계)",
+      "정부 엔티티 6개 패턴 자동 제외 (AC-9)",
+      "Loop Tier C 분류는 classifyLoop CASE 순서 보존",
+      "Multi-Source loop_signal은 보수적 가정 (참여 시 Tier B = 50)",
+      "BN ↔ entity_id 매핑은 source_schema=cra 기준 source_name=bn"
+    ]
+  }
+}
