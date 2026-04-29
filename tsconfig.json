@@ -1,0 +1,6 @@
+{
+  "_comment": "Repo root placeholder — LSP가 apps/web/tsconfig.json을 standalone project로 인식하도록 root는 빈 ownership",
+  "files": [],
+  "include": [],
+  "exclude": ["**"]
+}

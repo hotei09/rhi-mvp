@@ -1,0 +1,4 @@
+- [SPEC-RHI-001 layout](spec_rhi_001.md) — DB schema and tooling shape, only the surprising/non-obvious pieces
+- [Vitest jsdom config](vitest_dual_env.md) — how this repo runs Node + jsdom together
+- [Coverage compromise](coverage_thresholds.md) — branch threshold is 75, why
+- [Phase 4 DB quirks](phase4_db_schema_quirks.md) — vw_entity_search columns differ from queries.md docs
